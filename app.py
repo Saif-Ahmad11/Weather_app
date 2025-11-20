@@ -4,7 +4,8 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-API_KEY = 'c2562e9afc35e4acc3a281fe7731c27a'
+API_KEY =
+os.getenv('OPENWEATHER_API_KEY')  #Get key from environment
 
 @app.route('/')
 def home():
