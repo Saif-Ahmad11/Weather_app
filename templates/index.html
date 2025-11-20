@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🌦 Weather Forecast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="main-container">
+    <div class="weather-card">
+      <h1>Weather Forecast</h1>
+
+      <form method="POST" action="/get_weather" class="search-form">
+        <input type="text" name="city" placeholder="Enter city name" required>
+        <button type="submit">Search</button>
+      </form>
+
+      {% if weather %}
+      <div class="result">
+        <h2>{{ weather.city }}</h2>
+        <p class="timestamp">{{ weather.timestamp }}</p>
+        <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@4x.png" alt="Icon" />
+
+        <h3 class="desc">{{ weather.description }}</h3>
+        <div class="data-points">
+          <p> Current Temperature: <strong>{{ weather.temperature }}°C</strong></p>
+          <p> Min Temperature: <strong>{{ weather.temp_min }}°C</strong></p>
+          <p> Max Temperature: <strong>{{ weather.temp_max }}°C</strong></p>
+          <p> Feels Like: <strong>{{ weather.feels_like }}°C</strong></p>
+          <p> Humidity: <strong>{{ weather.humidity }}%</strong></p>
+          <p> Wind Speed: <strong>{{ weather.wind_speed }} m/s</strong></p>
+        </div>
+      </div>
+      {% elif error %}
+        <p class="error"> {{ error }}</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
